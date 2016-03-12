@@ -341,6 +341,14 @@ function alx_load() {
     load_template( get_stylesheet_directory() . '/functions/functions-bbpress.php' );
 }
 
+
+function clientproof_visual_editor( $mceInit ) {
+	$mceInit['paste_as_text'] = true;
+	return $mceInit;
+}
+
+add_filter('teeny_mce_before_init', 'clientproof_visual_editor');
+add_filter('tiny_mce_before_init', 'clientproof_visual_editor');
 add_filter('the_editor_content', 'arreat_add_editor_styles');
 add_action('wp_head', 'arreat_head');
 add_filter('bbp_kses_allowed_tags', 'arreat_allowed_tags');

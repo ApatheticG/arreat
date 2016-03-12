@@ -83,7 +83,7 @@
                                 <?php do_action( 'bbp_theme_before_reply_form_revisions' ); ?>
 
                                 <div class="bbp-form">
-                                    <label for="bbp_log_reply_edit"><input name="bbp_log_reply_edit" id="bbp_log_reply_edit" type="checkbox" value="1" <?php bbp_form_reply_log_edit(); ?> tabindex="<?php bbp_tab_index(); ?>" /> <?php _e( 'Keep a log of this edit:', 'bbpress' ); ?></label><br />
+                                    <label for="bbp_log_reply_edit"><input name="bbp_log_reply_edit" id="bbp_log_reply_edit" type="checkbox" value="1" tabindex="<?php bbp_tab_index(); ?>" /> <?php _e( 'Keep a log of this edit:', 'bbpress' ); ?></label><br />
                                     <div>
                                         <input type="text" value="<?php bbp_form_reply_edit_reason(); ?>" tabindex="<?php bbp_tab_index(); ?>" size="40" name="bbp_reply_edit_reason" id="bbp_reply_edit_reason" placeholder="<?php printf( __( 'Optional reason for editing:', 'bbpress' ), bbp_get_current_user_name() ); ?>"/>
                                     </div>
