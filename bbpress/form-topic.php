@@ -128,7 +128,7 @@
                             <?php if ( bbp_allow_revisions() && bbp_is_topic_edit() ) : ?>
                                 <?php do_action( 'bbp_theme_before_topic_form_revisions' ); ?>
                                 <div class="bbp-form">
-                                    <label for="bbp_log_topic_edit"><input name="bbp_log_topic_edit" id="bbp_log_topic_edit" type="checkbox" value="1" <?php bbp_form_topic_log_edit(); ?> tabindex="<?php bbp_tab_index(); ?>" /> <?php _e( 'Keep a log of this edit:', 'bbpress' ); ?></label>
+                                    <label for="bbp_log_topic_edit"><input name="bbp_log_topic_edit" id="bbp_log_topic_edit" type="checkbox" value="1" tabindex="<?php bbp_tab_index(); ?>" /> <?php _e( 'Keep a log of this edit:', 'bbpress' ); ?></label>
                                     <div>
                                         <input type="text" value="<?php bbp_form_topic_edit_reason(); ?>" tabindex="<?php bbp_tab_index(); ?>" size="40" name="bbp_topic_edit_reason" id="bbp_topic_edit_reason" placeholder="<?php printf( __( 'Optional reason for editing:', 'bbpress' ), bbp_get_current_user_name() ); ?>"/>
                                     </div>
