@@ -292,6 +292,15 @@ function custom_theme_options() {
                 )
             )
         ),
+        // Blog: Single - Post ads
+        array(
+            'id'		=> 'subpost-ads',
+            'label'		=> 'Реклама под записями',
+            'desc'		=> 'Зона для виджетов под записями',
+            'std'		=> 'off',
+            'type'		=> 'on-off',
+            'section'	=> 'blog'
+        ),
         // Header: Ads
         array(
             'id'		=> 'header-ads',
