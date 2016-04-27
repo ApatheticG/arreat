@@ -1,4 +1,5 @@
 <?php
+require_once('/functions/class-utils-settings-map.php');
 
 /**
  * Замена функции из родительской темы.
@@ -397,8 +398,6 @@ function hu_load() {
     load_template( get_template_directory() . '/functions/dynamic-styles.php' );
 
     load_template( get_stylesheet_directory() . '/functions/functions-bbpress.php' );
-
-    load_template( get_stylesheet_directory() . '/functions/class-utils-settings-map.php' );
 }
 
 
