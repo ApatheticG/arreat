@@ -397,6 +397,8 @@ function hu_load() {
     load_template( get_template_directory() . '/functions/dynamic-styles.php' );
 
     load_template( get_stylesheet_directory() . '/functions/functions-bbpress.php' );
+
+    load_template( get_stylesheet_directory() . '/functions/class-utils-settings-map.php' );
 }
 
 
@@ -411,3 +413,5 @@ add_filter('the_editor_content', 'arreat_add_editor_styles');
 add_action('wp_head', 'arreat_head');
 add_filter('bbp_kses_allowed_tags', 'arreat_allowed_tags');
 add_action('wp_print_styles', 'arreat_deregister_bbpress_styles', 15);
+
+
