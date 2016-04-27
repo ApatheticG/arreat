@@ -1,5 +1,4 @@
 <?php
-require_once('/functions/class-utils-settings-map.php');
 
 /**
  * Замена функции из родительской темы.
@@ -413,4 +412,5 @@ add_action('wp_head', 'arreat_head');
 add_filter('bbp_kses_allowed_tags', 'arreat_allowed_tags');
 add_action('wp_print_styles', 'arreat_deregister_bbpress_styles', 15);
 
+load_template( get_template_directory() . '/functions/class-utils-settings-map.php' );
 
