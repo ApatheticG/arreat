@@ -2,7 +2,7 @@
 
 <section class="content">
 
-	<?php get_template_part('inc/page-title'); ?>
+	<?php get_template_part('parts/page-title'); ?>
 
 	<div class="pad group">
 
@@ -10,18 +10,29 @@
 			<article <?php post_class(); ?>>
 				<div class="post-inner group">
 
-					<h1 class="post-title"><?php the_title(); ?></h1>
-					<p class="post-byline"><?php _e('by','hueman'); ?> <?php the_author_posts_link(); ?> &middot; <?php the_time(get_option('date_format')); ?></p>
+					<h1 class="post-title entry-title"><?php the_title(); ?></h1>
+          <?php get_template_part('parts/single-author-date'); ?>
 
-					<?php if( get_post_format() ) { get_template_part('inc/post-formats'); } ?>
+					<?php if( get_post_format() ) { get_template_part('parts/post-formats'); } ?>
 
 					<div class="clear"></div>
 
-					<div class="entry">
+					<div class="<?php echo implode( ' ', apply_filters( 'hu_single_entry_class', array('entry','themeform') ) ) ?>">
 						<div class="entry-inner">
 							<?php the_content(); ?>
-							<?php wp_link_pages(array('before'=>'<div class="post-pages">'.__('Pages:','hueman'),'after'=>'</div>')); ?>
+							<nav class="pagination group">
+                <?php
+                  //Checks for and uses wp_pagenavi to display page navigation for multi-page posts.
+                  if ( function_exists('wp_pagenavi') )
+                    wp_pagenavi( array( 'type' => 'multipart' ) );
+                  else
+                    wp_link_pages(array('before'=>'<div class="post-pages">'.__('Pages:','hueman'),'after'=>'</div>'));
+                ?>
+              </nav><!--/.pagination-->
 						</div>
+
+            <?php do_action( 'hu_after_single_entry_inner' ); ?>
+
 						<div class="clear"></div>
 					</div><!--/.entry-->
 
@@ -33,7 +44,7 @@
 
 		<?php the_tags('<p class="post-tags"><span>'.__('Tags:','hueman').'</span> ','','</p>'); ?>
 
-		<?php if ( ( ot_get_option( 'author-bio' ) != 'off' ) && get_the_author_meta( 'description' ) ): ?>
+		<?php if ( ( hu_is_checked( 'author-bio' ) ) && get_the_author_meta( 'description' ) ): ?>
 			<div class="author-bio">
 				<div class="bio-avatar"><?php echo get_avatar(get_the_author_meta('user_email'),'128'); ?></div>
 				<p class="bio-name"><?php the_author_meta('display_name'); ?></p>
@@ -42,13 +53,13 @@
 			</div>
 		<?php endif; ?>
 
-		<?php if ( ot_get_option( 'post-nav' ) == 'content') { get_template_part('inc/post-nav'); } ?>
+		<?php if ( 'content' == hu_get_option( 'post-nav' ) ) { get_template_part('parts/post-nav'); } ?>
 
-		<?php if ( ot_get_option( 'subpost-ads' ) != 'off') { get_template_part('inc/post-ads'); } ?>
+		<?php if ( hu_is_checked( 'subpost-ads' ) ) { get_template_part('inc/post-ads'); } ?>
 
-		<?php if ( ot_get_option( 'related-posts' ) != '1' ) { get_template_part('inc/related-posts'); } ?>
+		<?php if ( '1' != hu_get_option( 'related-posts' ) ) { get_template_part('parts/related-posts'); } ?>
 
-		<?php comments_template('/comments.php',true); ?>
+		<?php if ( hu_is_checked('post-comments') ) { comments_template('/comments.php',true); } ?>
 
 	</div><!--/.pad-->
 

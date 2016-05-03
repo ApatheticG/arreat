@@ -1,5 +1,7 @@
 <?php
 
+load_template( get_stylesheet_directory() . '/functions/class-utils-settings-map.php' );
+
 /**
  * Замена функции из родительской темы.
  * Нужна, если нужно будет убрать сайдбар.
@@ -61,6 +63,7 @@ if ( ! hu_is_checked('dynamic-styles') )
   if ( hu_get_option( 'font' ) == 'droid-serif' ) { $styles .= 'body { font-family: "Droid Serif", serif; }'."\n"; }
   if ( hu_get_option( 'font' ) == 'source-sans-pro' ) { $styles .= 'body { font-family: "Source Sans Pro", Arial, sans-serif; }'."\n"; }
   if ( hu_get_option( 'font' ) == 'lato' ) { $styles .= 'body { font-family: "Lato", Arial, sans-serif; }'."\n"; }
+  if ( hu_get_option( 'font' ) == 'noto-cyr' ) { $styles .= 'body { font-family: "Noto Sans", sans-serif; }'."\n"; }
   if ( hu_get_option( 'font' ) == 'raleway' ) { $styles .= 'body { font-family: "Raleway", Arial, sans-serif; }'."\n"; }
   if ( ( hu_get_option( 'font' ) == 'ubuntu' ) || ( hu_get_option( 'font' ) == 'ubuntu-cyr' ) ) { $styles .= 'body { font-family: "Ubuntu", Arial, sans-serif; }'."\n"; }
   if ( ( hu_get_option( 'font' ) == 'roboto-condensed' ) || ( hu_get_option( 'font' ) == 'roboto-condensed-cyr' ) ) { $styles .= 'body { font-family: "Roboto Condensed", Arial, sans-serif; }'."\n"; }
@@ -298,20 +301,18 @@ function hu_google_fonts () {
 }
 
 /**
- * Замена функции из оригинального шаблона
+ * Добавление сайдбара
  */
-function alx_sidebars()	{
-    register_sidebar(array( 'name' => 'Primary','id' => 'primary','description' => "Normal full width sidebar", 'before_widget' => '<div id="%1$s" class="widget %2$s">','after_widget' => '</div>','before_title' => '<h3>','after_title' => '</h3>'));
-    register_sidebar(array( 'name' => 'Secondary','id' => 'secondary','description' => "Normal full width sidebar", 'before_widget' => '<div id="%1$s" class="widget %2$s">','after_widget' => '</div>','before_title' => '<h3>','after_title' => '</h3>'));
-    if ( hu_get_option('header-ads') == 'on' ) { register_sidebar(array( 'name' => 'Header Ads','id' => 'header-ads', 'description' => "Header ads area", 'before_widget' => '<div id="%1$s" class="widget %2$s">','after_widget' => '</div>','before_title' => '<h3>','after_title' => '</h3>')); }
-    if ( hu_get_option('footer-ads') == 'on' ) { register_sidebar(array( 'name' => 'Footer Ads','id' => 'footer-ads', 'description' => "Footer ads area", 'before_widget' => '<div id="%1$s" class="widget %2$s">','after_widget' => '</div>','before_title' => '<h3>','after_title' => '</h3>')); }
-    if ( hu_get_option('subpost-ads') == 'on' ) { register_sidebar(array( 'name' => 'Subpost Ads','id' => 'subpost-ads', 'description' => "Ads under posts and before posts navigation", 'before_widget' => '<div id="%1$s" class="widget %2$s">','after_widget' => '</div>','before_title' => '<h3>','after_title' => '</h3>')); }
-    if ( hu_get_option('footer-widgets') >= '1' ) { register_sidebar(array( 'name' => 'Footer 1','id' => 'footer-1', 'description' => "Widgetized footer", 'before_widget' => '<div id="%1$s" class="widget %2$s">','after_widget' => '</div>','before_title' => '<h3>','after_title' => '</h3>')); }
-    if ( hu_get_option('footer-widgets') >= '2' ) { register_sidebar(array( 'name' => 'Footer 2','id' => 'footer-2', 'description' => "Widgetized footer", 'before_widget' => '<div id="%1$s" class="widget %2$s">','after_widget' => '</div>','before_title' => '<h3>','after_title' => '</h3>')); }
-    if ( hu_get_option('footer-widgets') >= '3' ) { register_sidebar(array( 'name' => 'Footer 3','id' => 'footer-3', 'description' => "Widgetized footer", 'before_widget' => '<div id="%1$s" class="widget %2$s">','after_widget' => '</div>','before_title' => '<h3>','after_title' => '</h3>')); }
-    if ( hu_get_option('footer-widgets') >= '4' ) { register_sidebar(array( 'name' => 'Footer 4','id' => 'footer-4', 'description' => "Widgetized footer", 'before_widget' => '<div id="%1$s" class="widget %2$s">','after_widget' => '</div>','before_title' => '<h3>','after_title' => '</h3>')); }
+function arreat_register_sidebars() {
+    if (hu_is_checked('subpost-ads')) {
+        register_sidebar([
+            'name' => 'Виджеты под записью',
+            'id' => 'subpost-ads',
+            'before_widget' => '<div id="%1$s" class="widget %2$s">',
+            'after_widget' => '</div>','before_title' => '<h3>','after_title' => '</h3>'
+        ]);
+    }
 }
-
 
 /**
  * Добавление стилей к визуальному редактору
@@ -411,6 +412,5 @@ add_filter('the_editor_content', 'arreat_add_editor_styles');
 add_action('wp_head', 'arreat_head');
 add_filter('bbp_kses_allowed_tags', 'arreat_allowed_tags');
 add_action('wp_print_styles', 'arreat_deregister_bbpress_styles', 15);
-
-load_template( get_template_directory() . '/functions/class-utils-settings-map.php' );
+add_action( 'widgets_init', 'arreat_register_sidebars' );
 

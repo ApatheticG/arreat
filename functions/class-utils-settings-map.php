@@ -11,6 +11,7 @@
 * @link         http://presscustomizr.com/hueman
 * @license      http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 */
+
   class HU_utils_settings_map {
     static $instance;
     private $is_wp_version_before_4_0;
@@ -668,6 +669,14 @@
                   'content'     => __( 'Below content' , 'hueman' )
                 ),
                 'notice'    => __( 'Display links to the next and previous article' , 'hueman')
+          ),
+          'subpost-ads' => array(
+                'default'   => 1,
+                'control'   => 'HU_controls',
+                'label'     => 'Реклама под записями',
+                'section'   => 'content_single_sec',
+                'type'      => 'checkbox',
+                'notice'    => 'Зона для виджетов под записями'
           )
         );
     }
@@ -1094,7 +1103,6 @@
           'titillium-web-ext'   => 'Titillium Web, Latin-Ext',
           'droid-serif'         => 'Droid Serif, Latin',
           'source-sans-pro'     => 'Source Sans Pro, Latin-Ext',
-          'noto'                => 'Noto, Latin-Ext',
           'noto-cyr'            => 'Noto, Latin / Cyrillic-Ext',
           'lato'                => 'Lato, Latin',
           'raleway'             => 'Raleway, Latin',
