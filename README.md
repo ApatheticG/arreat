@@ -2,7 +2,7 @@
 * Theme Name:   Arreat
 * Theme URI:    http://arreat.ru/
 * Description:  Arreat.ru theme
-* Version:      1.6.3
+* Version:      1.6.4
 * License:      GNU General Public License v2 or later
 
 
